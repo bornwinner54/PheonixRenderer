@@ -1,0 +1,31 @@
+# Build
+build/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Ninja
+.ninja_deps
+.ninja_log
+
+# Visual Studio
+.vs/
+
+# VS Code
+.vscode/
+
+# Output
+bin/
+lib/
+
+# User files
+*.user
+*.VC.db
+*.opendb
+
+# Debug
+*.pdb
+*.ilk
