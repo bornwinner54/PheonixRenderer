@@ -7,11 +7,20 @@ Renderer:: Renderer(Win32Window* window)
 {
     Window = window;
     GLContextInstance = new GLContext();
+    m_Shader = nullptr;
 }
 
 bool Renderer::Initialize()
 {
     if (!GLContextInstance->Initialize(Window->GetHDC())) {
+        return false;
+    }
+
+    m_Shader = new Shader();
+    if (!m_Shader->Load(
+            "Assets/Shaders/Basic.vert",
+            "Assets/Shaders/Basic.frag"))
+    {
         return false;
     }
 
@@ -37,6 +46,7 @@ void Renderer::Render(float deltaTime, float totalTime)
     glClearColor( 0.5f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     // Swap the front and back buffers
+    
     GLContextInstance->SwapBuffers(Window->GetHDC());
 }
 
@@ -49,4 +59,6 @@ void Renderer::update()
 void Renderer::Uninitialize()
 {
     // Clean up resources if necessary
+    delete m_Shader;
+    m_Shader = nullptr;
 }

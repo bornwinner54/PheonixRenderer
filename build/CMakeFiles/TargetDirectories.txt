@@ -1,3 +1,0 @@
-G:/Project/PheonixRenderer/build/CMakeFiles/PhoenixRenderer.dir
-G:/Project/PheonixRenderer/build/CMakeFiles/edit_cache.dir
-G:/Project/PheonixRenderer/build/CMakeFiles/rebuild_cache.dir

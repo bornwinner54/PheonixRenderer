@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "../Platform/Win32/Win32Window.h"
 #include "../Renderer/Renderer.h"
+#include <iostream>
 
 Application:: Application()
 {
@@ -24,6 +25,16 @@ Application:: ~Application()
 
 bool Application:: Initialize(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow)
 {
+    AllocConsole();
+
+    FILE* fp;
+
+    freopen_s(&fp, "CONOUT$", "w", stdout);
+    freopen_s(&fp, "CONOUT$", "w", stderr);
+    freopen_s(&fp, "CONIN$", "r", stdin);
+
+    std::cout << "Console initialized\n";
+
     Window = new Win32Window();
     if(!Window->Initialize(hInstance, 800, 600, L"Renderer_v0.0")) {
         return false;
@@ -41,6 +52,8 @@ bool Application:: Initialize(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 int Application:: Run(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdLine, int iCmdShow)
 {
     if (!Initialize(hInstance, hPrevInstance, lpszCmdLine, iCmdShow)) {
+        std::cout << "Initialization failed. Press Enter to exit...";
+        std::cin.get();
         return -1;
     }
 

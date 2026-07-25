@@ -4,6 +4,7 @@ class Win32Window;
 class GLContext;
 #include <GL/glew.h>
 #include <GL/gl.h>
+#include "Shader.h"
 
 class Renderer {
     public:
@@ -17,4 +18,5 @@ class Renderer {
     private:
         Win32Window* Window;
         GLContext* GLContextInstance;
+        Shader* m_Shader;
 };
