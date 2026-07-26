@@ -24,6 +24,18 @@ bool Renderer::Initialize()
         return false;
     }
 
+    std::vector<Vertex> vertices = {
+        {{  0.0f,  0.5f, 0.0f }},
+        {{ -0.5f, -0.5f, 0.0f }},
+        {{  0.5f, -0.5f, 0.0f }}
+    };
+
+    m_triangleMesh = new Mesh();
+
+    if (!m_triangleMesh->Create(vertices)) {
+        return false;
+    }
+
     return true;
 }
 
@@ -42,11 +54,13 @@ void Renderer::resize(int width, int height)
 
 void Renderer::Render(float deltaTime, float totalTime)
 {
-
-    glClearColor( 0.5f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     // Swap the front and back buffers
     
+    m_Shader->Bind();
+    m_triangleMesh->Draw();
+    m_Shader->Unbind();
+
     GLContextInstance->SwapBuffers(Window->GetHDC());
 }
 
@@ -61,4 +75,10 @@ void Renderer::Uninitialize()
     // Clean up resources if necessary
     delete m_Shader;
     m_Shader = nullptr;
+    
+    if (m_triangleMesh)
+{
+    delete m_triangleMesh;
+    m_triangleMesh = nullptr;
+}
 }

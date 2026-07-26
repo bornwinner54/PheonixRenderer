@@ -5,6 +5,7 @@ class GLContext;
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include "Shader.h"
+#include "Mesh.h"
 
 class Renderer {
     public:
@@ -19,4 +20,5 @@ class Renderer {
         Win32Window* Window;
         GLContext* GLContextInstance;
         Shader* m_Shader;
+        Mesh* m_triangleMesh;
 };
