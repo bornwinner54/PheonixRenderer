@@ -6,6 +6,7 @@ class GLContext;
 #include <GL/gl.h>
 #include "Shader.h"
 #include "Mesh.h"
+#include "../Scene/Transform.h"
 
 class Renderer {
     public:
@@ -21,4 +22,5 @@ class Renderer {
         GLContext* GLContextInstance;
         Shader* m_Shader;
         Mesh* m_triangleMesh;
+        Transform m_transform;
 };

@@ -14,6 +14,89 @@ Shader::~Shader()
     Destroy();
 }
 
+void Shader::SetMat4(const std::string& name, const glm::mat4& value)
+{
+    GLint location = glGetUniformLocation(m_Program, name.c_str());
+    
+    if(location == -1)
+    {
+        std::cerr << "Uniform '" << name << "' not found in shader program." << std::endl;
+        return;
+    }
+
+    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void Shader::SetFloat(
+    const std::string& name,
+    float value)
+{
+    GLint location =
+        glGetUniformLocation(
+            m_Program,
+            name.c_str()
+        );
+
+    if (location == -1)
+    {
+        std::cerr
+            << "Uniform not found: "
+            << name
+            << std::endl;
+        return;
+    }
+
+    glUniform1f(location, value);
+}
+
+void Shader::SetInt(
+    const std::string& name,
+    int value)
+{
+    GLint location =
+        glGetUniformLocation(
+            m_Program,
+            name.c_str()
+        );
+
+    if (location == -1)
+    {
+        std::cerr
+            << "Uniform not found: "
+            << name
+            << std::endl;
+        return;
+    }
+
+    glUniform1i(location, value);
+}
+
+void Shader::SetVec3(
+    const std::string& name,
+    const glm::vec3& value)
+{
+    GLint location =
+        glGetUniformLocation(
+            m_Program,
+            name.c_str()
+        );
+
+    if (location == -1)
+    {
+        std::cerr
+            << "Uniform not found: "
+            << name
+            << std::endl;
+        return;
+    }
+
+    glUniform3fv(
+        location,
+        1,
+        glm::value_ptr(value)
+    );
+}
+
 GLuint Shader::CompileShader(GLenum shaderType,
                              const std::string& source)
 {
