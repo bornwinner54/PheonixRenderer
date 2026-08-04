@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.5 - Camera System
+
+- Camera class
+- View matrix generation using glm::lookAt
+- Projection matrix generation using glm::perspective
+- MVP rendering pipeline
+- Camera integration into Renderer
+
+
 # v0.4 - Transform System
 
 - Transform class

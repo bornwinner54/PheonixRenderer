@@ -1,28 +1,36 @@
-Application
+Vertex
 
 ↓
 
-Renderer
+Model
 
 ↓
 
-Shader
+World
 
 ↓
 
-Upload Model Matrix
+View
 
 ↓
 
-Mesh
+Camera
 
 ↓
 
-OpenGL
+Projection
 
 ↓
 
-GPU
+Clip Space
+
+↓
+
+Rasterizer
+
+↓
+
+Fragment Shader
 
 ↓
 

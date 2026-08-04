@@ -2,6 +2,36 @@
 
 ## Completed
 
+- Created Camera class
+- Implemented View Matrix
+- Implemented Projection Matrix
+- Integrated Camera into Renderer
+- Updated vertex shader for MVP pipeline
+- Verified perspective rendering
+
+## Problems
+
+- Incorrect return type for GetProjectionMatrix() (glm::vec3 instead of glm::mat4)
+- Shader uniform upload mismatch
+
+## Lessons Learned
+
+- The camera is represented by the inverse view transformation.
+- glm::lookAt() constructs the view matrix from position, front and up vectors.
+- glm::perspective() defines the camera's viewing frustum.
+- Matrix multiplication order is Projection × View × Model × Vertex.
+
+## Next Session
+
+- Camera movement (WASD)
+- Delta-time movement
+- Mouse look
+- Yaw and Pitch
+
+# 2026-08-04
+
+## Completed
+
 - Implemented Transform class.
 - Added Position, Rotation and Scale support.
 - Implemented model matrix generation using GLM.

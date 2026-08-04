@@ -60,12 +60,27 @@ void Renderer::Render(float deltaTime, float totalTime)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     // Swap the front and back buffers
-    
-    glm::mat4 model =
-    m_transform.GetModelMatrix();
+
+    glm::mat4 model = m_transform.GetModelMatrix();
+    glm::mat4 view = m_camera.GetViewMatrix();
+    glm::mat4 projection = m_camera.GetProjectionMatrix();
 
     m_Shader->Bind();
-    m_Shader->SetMat4("u_Model", model);
+
+    m_Shader->SetMat4(
+        "u_Model",
+        model
+    );
+
+    m_Shader->SetMat4(
+        "u_View",
+        view
+    );
+
+    m_Shader->SetMat4(
+        "u_Projection",
+        projection
+    );
 
     m_triangleMesh->Draw();
     m_Shader->Unbind();

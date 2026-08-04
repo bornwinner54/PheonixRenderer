@@ -1,14 +1,23 @@
-Application
+PhoenixRenderer/
+
+Source/
+
+├── Core/
+│   └── Timer
 │
-├── Window
-├── Timer
+├── Platform/
+│   ├── Window
+│   └── GLContext
 │
-└── Renderer
-    │
-    ├── Shader
-    ├── Mesh
-    │   ├── VertexArray
-    │   └── VertexBuffer
-    ├── Transform
-    │
-    └── OpenGL Context
+├── Renderer/
+│   ├── Shader
+│   ├── Mesh
+│   ├── VertexBuffer
+│   ├── VertexArray
+│   └── Renderer
+│
+├── Scene/
+│   └── Transform
+│
+└── Camera/
+    └── Camera
