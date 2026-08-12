@@ -7,7 +7,7 @@ The goal of PhoenixRenderer is to create a cinematic real-time short film,
 
 Current Version
 
-v0.4 Transform System
+v0.6 Camera Controls
 
 Current Features
 
@@ -19,10 +19,11 @@ Current Features
 ✓ Mesh Rendering
 ✓ Timer
 ✓ Transform System
+✓ Camera
 
 ## Roadmap
 
-- Camera
+
 - Materials
 - HDR Rendering
 - Bloom

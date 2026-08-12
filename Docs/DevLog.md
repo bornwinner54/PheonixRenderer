@@ -1,3 +1,37 @@
+# 2026-08-12
+
+## Completed
+
+- Added camera resize handling
+- Added Win32 window resize callback
+- Connected WM_SIZE to Renderer
+- Updated OpenGL viewport on window resize
+- Updated camera aspect ratio dynamically
+- Fixed fullscreen rendering clipping
+- Added Win32 HWND to Win32Window object association
+
+## Problems
+
+- Fullscreen initially clipped part of the rendered scene.
+- Camera projection retained the original 4:3 aspect ratio.
+- Win32Window needed a mechanism to communicate resize events without depending directly on Renderer.
+
+## Lessons Learned
+
+- WM_SIZE is the Win32 event used for window size changes.
+- OpenGL viewport dimensions must match the drawable window dimensions.
+- Camera projection aspect ratio must be updated when the window changes size.
+- Static Win32 WndProc functions require an object association mechanism when working with C++ classes.
+- Callback-based communication keeps the platform layer independent from the renderer.
+- Application is responsible for connecting Win32Window events to Renderer behavior.
+
+## Next Session
+
+- Input system
+- Keyboard input handling
+- Mouse input handling
+- Camera movement
+
 # 2026-08-04
 
 ## Completed
