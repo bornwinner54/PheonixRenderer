@@ -45,6 +45,13 @@ bool Application:: Initialize(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
         return false;
     }
 
+    Window->SetResizeCallback(
+        [this](int width, int height)
+        {
+            RendererInstance->resize(width, height);
+        }
+    );
+
     Running = true;
     return true;
 }

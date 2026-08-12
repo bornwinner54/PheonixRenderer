@@ -36,7 +36,7 @@ bool Win32Window::Initialize(HINSTANCE hInstance, int width, int height, const w
         NULL,
         NULL,
         hInstance,
-        NULL);
+        this);
 
     ShowWindow(hwnd, SW_SHOW);
     SetForegroundWindow(hwnd);  
@@ -47,6 +47,27 @@ bool Win32Window::Initialize(HINSTANCE hInstance, int width, int height, const w
 }
 
 LRESULT CALLBACK Win32Window::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+
+    if (msg == WM_NCCREATE)
+    {
+        CREATESTRUCT* createStruct =
+            reinterpret_cast<CREATESTRUCT*>(lParam);
+
+        Win32Window* window =
+            static_cast<Win32Window*>(createStruct->lpCreateParams);
+
+        SetWindowLongPtr(
+            hwnd,
+            GWLP_USERDATA,
+            reinterpret_cast<LONG_PTR>(window)
+        );
+    }
+
+    Win32Window* window =
+        reinterpret_cast<Win32Window*>(
+            GetWindowLongPtr(hwnd, GWLP_USERDATA)
+        );
+
     switch (msg) {
     //     case WM_SETFOCUS:
 	// 	gbActive = TRUE;
@@ -56,9 +77,20 @@ LRESULT CALLBACK Win32Window::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 	// 	gbActive = FALSE;
 	// 	break;
 
-	// case WM_SIZE:
-	// 	resize_cube(LOWORD(lParam),HIWORD(lParam));
-	// 	break;
+	case WM_SIZE:
+        {
+            int width = LOWORD(lParam);
+            int height = HIWORD(lParam);
+
+            if (width > 0 &&
+                height > 0 &&
+                window)
+            {
+                window->HandleResize(width, height);
+            }
+
+            break;
+        }
 
 	case WM_ERASEBKGND:
 		return(0);
@@ -83,6 +115,7 @@ LRESULT CALLBACK Win32Window::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM
 	case WM_CHAR:
 		switch (LOWORD(wParam))
 		{
+            default:
             break;
         }
         break;
@@ -152,5 +185,18 @@ void Win32Window::ToggleFullscreen(HWND hwnd)
             previousRect.right - previousRect.left,
             previousRect.bottom - previousRect.top,
             SWP_FRAMECHANGED);
+    }
+}
+
+void Win32Window::SetResizeCallback(ResizeCallback callback)
+{
+    m_ResizeCallback = callback;
+}
+
+void Win32Window::HandleResize(int width, int height)
+{
+    if (m_ResizeCallback)
+    {
+        m_ResizeCallback(width, height);
     }
 }

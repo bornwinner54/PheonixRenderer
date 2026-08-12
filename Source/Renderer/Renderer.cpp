@@ -4,6 +4,8 @@
 #include <cmath>
 
 Renderer:: Renderer(Win32Window* window)
+        : m_camera(),
+      m_cameraController(m_camera)
 {
     Window = window;
     GLContextInstance = new GLContext();
@@ -54,12 +56,20 @@ void Renderer::resize(int width, int height)
 	Window-> winHeight = height;
 
     GLContextInstance->Resize(Window->GetHDC(), width, height);
+
+    float aspectRatio =
+        static_cast<float>(width) /
+        static_cast<float>(height);
+
+    m_camera.SetAspectRatio(aspectRatio);
 }
 
 void Renderer::Render(float deltaTime, float totalTime)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     // Swap the front and back buffers
+
+    m_cameraController.update(deltaTime);
 
     glm::mat4 model = m_transform.GetModelMatrix();
     glm::mat4 view = m_camera.GetViewMatrix();
